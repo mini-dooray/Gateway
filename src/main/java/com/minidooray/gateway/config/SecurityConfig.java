@@ -28,6 +28,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeRequests()
+                    .antMatchers("/signup").permitAll()
+                    .antMatchers("/signup/submit").permitAll()
                     .antMatchers("/login").permitAll()
                     .antMatchers("/home").permitAll()
                     .anyRequest().authenticated()
