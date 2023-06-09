@@ -30,7 +30,7 @@ public class OAuthLoginSuccessService extends DefaultOAuth2UserService {
         String email = githubService.getGithubEmail(oAuth2UserRequest.getAccessToken().getTokenValue());
         Account account = accountAdapter.getAccountByEmail(email);
         return new AccountDetails(account.getAccountId(), account.getPassword(),
-                Collections.singletonList((GrantedAuthority) Collections.emptyList())
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
                 ,oAuth2User.getAttributes());
     }
 }

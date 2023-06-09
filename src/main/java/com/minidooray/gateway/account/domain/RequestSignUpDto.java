@@ -1,6 +1,7 @@
 package com.minidooray.gateway.account.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class RequestSignUpDto {
 
     @NotNull
