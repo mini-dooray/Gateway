@@ -1,5 +1,7 @@
 package com.minidooray.gateway.account.handler;
 
+import com.minidooray.gateway.account.adapter.AccountAdapter;
+import com.minidooray.gateway.account.domain.Account;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.redis.core.RedisTemplate;
@@ -20,6 +22,8 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 
     private final RedisTemplate<String, Object> redisTemplate;
 
+    private final AccountAdapter adapter;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
@@ -33,9 +37,11 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
         String authority = new ArrayList<>(userDetails.getAuthorities()).get(0).getAuthority();
-
+        Account account = adapter.getAccountById(username);
+        Long seq = account.getAccountSeq();
         redisTemplate.opsForHash().put(sessionId, "username", username);
         redisTemplate.opsForHash().put(sessionId, "authority", authority);
+        redisTemplate.opsForHash().put(sessionId, "seq", seq);
 
         super.onAuthenticationSuccess(request, response, authentication);
     }

@@ -1,5 +1,6 @@
 package com.minidooray.gateway.config;
 
+import com.minidooray.gateway.account.adapter.AccountAdapter;
 import com.minidooray.gateway.account.domain.AccountDetails;
 import com.minidooray.gateway.account.handler.LoginSuccessHandler;
 import com.minidooray.gateway.account.handler.OAuth2LoginFailureHandler;
@@ -31,6 +32,8 @@ public class SecurityConfig {
 
     private final OAuthLoginSuccessService oAuthLoginSuccessService;
 
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -42,12 +45,12 @@ public class SecurityConfig {
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
-                    .successHandler(loginSuccessHandler(null))
+                    .successHandler(loginSuccessHandler(null, null))
                     .and()
                 .oauth2Login()
 //                    .clientRegistrationRepository(clientRegistrationRepository())
 //                    .authorizedClientService(auth2AuthorizedClientService())
-                    .successHandler(loginSuccessHandler(null))
+                    .successHandler(loginSuccessHandler(null, null))
                     .failureHandler(new OAuth2LoginFailureHandler())
                     .userInfoEndpoint().userService(oAuthLoginSuccessService).and()
                     .and()
@@ -95,8 +98,8 @@ public class SecurityConfig {
 //    }
 
     @Bean
-    public AuthenticationSuccessHandler loginSuccessHandler(RedisTemplate<String, Object> redisTemplate) {
-        return new LoginSuccessHandler(redisTemplate);
+    public AuthenticationSuccessHandler loginSuccessHandler(RedisTemplate<String, Object> redisTemplate, AccountAdapter adapter) {
+        return new LoginSuccessHandler(redisTemplate, adapter);
     }
 
 //    @Bean

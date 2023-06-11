@@ -1,6 +1,7 @@
 package com.minidooray.gateway.account.service;
 
 import com.minidooray.gateway.account.adapter.AccountAdapter;
+import com.minidooray.gateway.account.domain.Account;
 import com.minidooray.gateway.account.domain.RequestSignUpDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,11 @@ public class AccountServiceImpl implements AccountService{
             validatorResult.put(validKeyName, error.getDefaultMessage());
         }
         return validatorResult;
+    }
+
+    @Override
+    public Account getAccountById(String id) {
+        return accountAdapter.getAccountById(id);
     }
 
     @Override

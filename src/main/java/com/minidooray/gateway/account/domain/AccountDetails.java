@@ -51,7 +51,7 @@ public class AccountDetails implements UserDetails, OAuth2User {
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override

@@ -30,7 +30,7 @@ public class LogoutController {
             cookie.setMaxAge(0);
             response.addCookie(cookie);
 
-            redisTemplate.opsForHash().delete(sessionId, "username", "authority");
+            redisTemplate.opsForHash().delete(sessionId, "username", "authority", "seq");
         }
 
         return "redirect:/login";

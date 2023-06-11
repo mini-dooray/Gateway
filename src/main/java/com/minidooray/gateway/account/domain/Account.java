@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Setter
 public class Account {
 
-    private Integer accountSeq;
+    private Long accountSeq;
 
     private String accountId;
 

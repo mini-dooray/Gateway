@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+<!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">-->
+<style>
+  .leftnavbar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 200px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .navbar-brand {
+    color: #000;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: auto;
+  }
+
+  .navbar-nav .nav-link {
+    color: #000;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #fff;
+    background-color: #007bff;
+  }
+</style>
+</head>
+<body>
+<nav th:fragment="leftnavbar" class="leftnavbar">
+<div class="container-fluid">
+  <div class="leftnavbar-brand">
+    프로젝트 목록
+  </div>
+<!--<div class="btn-group-vertical" role="group">-->
+<!--<div th:each="list : ${projectlist}">-->
+<!--    <button type="button" class="btn btn-outline-primary" th:text="${list.name}"></button>-->
+<!--</div>-->
+<!--</div>-->
+
+    <div class="list-group">
+        <div th:each="list : ${projectlist}">
+            <a th:href="@{/}" class="list-group-item list-group-item-action" th:text="${list.name}"></a>
+        </div>
+    </div>
+</div>
+</nav>
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>-->
+
+</body>
+</html>

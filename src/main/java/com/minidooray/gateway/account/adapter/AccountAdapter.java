@@ -8,6 +8,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -50,12 +51,12 @@ public class AccountAdapter {
 
         HttpEntity<String> requestEntity = new HttpEntity<>(email, httpHeaders);
         try {
-            exchange = restTemplate.exchange(URL + "/email/found/" + email,
+            exchange = restTemplate.exchange(URL + "/account/" + email + "/found",
                     HttpMethod.GET,
                     requestEntity,
                     new ParameterizedTypeReference<Account>() {
                     });
-        } catch (HttpClientErrorException e) {
+        } catch (HttpServerErrorException e) {
             throw new NotFoundEmailException(e.getMessage(), email);
         }
         return exchange.getBody();
