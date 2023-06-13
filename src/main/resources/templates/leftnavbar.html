@@ -50,7 +50,7 @@
 
     <div class="list-group">
         <div th:each="list : ${projectlist}">
-            <a th:href="@{/}" class="list-group-item list-group-item-action" th:text="${list.name}"></a>
+            <a th:href="@{/project/projects/{list}/dashboard(list=${list.seq})}" class="list-group-item list-group-item-action" th:text="${list.name}"></a>
         </div>
     </div>
 </div>

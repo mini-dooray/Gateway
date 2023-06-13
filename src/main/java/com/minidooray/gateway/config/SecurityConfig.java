@@ -2,6 +2,7 @@ package com.minidooray.gateway.config;
 
 import com.minidooray.gateway.account.adapter.AccountAdapter;
 import com.minidooray.gateway.account.domain.AccountDetails;
+import com.minidooray.gateway.account.handler.CustomLogoutSuccessHandler;
 import com.minidooray.gateway.account.handler.LoginSuccessHandler;
 import com.minidooray.gateway.account.handler.OAuth2LoginFailureHandler;
 import com.minidooray.gateway.account.service.CustomUserDetailsService;
@@ -32,6 +33,8 @@ public class SecurityConfig {
 
     private final OAuthLoginSuccessService oAuthLoginSuccessService;
 
+    private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
+
 
 
     @Bean
@@ -42,7 +45,7 @@ public class SecurityConfig {
                     .antMatchers("/signup/submit").permitAll()
                     .antMatchers("/login").permitAll()
                     .antMatchers("/home").permitAll()
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
                     .and()
                 .formLogin()
                     .successHandler(loginSuccessHandler(null, null))
@@ -55,6 +58,9 @@ public class SecurityConfig {
                     .userInfoEndpoint().userService(oAuthLoginSuccessService).and()
                     .and()
                 .logout()
+                    .logoutSuccessHandler(customLogoutSuccessHandler)
+                    .logoutSuccessUrl("/login")
+                    .invalidateHttpSession(true)
                     .and()
                 .csrf()
                     .disable()

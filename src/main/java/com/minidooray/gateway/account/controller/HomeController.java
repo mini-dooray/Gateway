@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +27,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(@CookieValue(name = "SESSION", required = false) String sessionId, Model model) {
+
         if (Objects.isNull(sessionId)) {
             return "redirect:/login";
         } else {
@@ -33,6 +35,7 @@ public class HomeController {
             String authority = (String) redisTemplate.opsForHash().get(sessionId, "authority");
             Integer seq = (Integer) redisTemplate.opsForHash().get(sessionId, "seq");
             Account account = accountService.getAccountById(username);
+
 
             List<ResponseProjectListDto> projectListDtoList = projectService.getProjects(Long.valueOf(seq));
 
