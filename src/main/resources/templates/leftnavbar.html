@@ -40,7 +40,7 @@
 <nav th:fragment="leftnavbar" class="leftnavbar">
 <div class="container-fluid">
   <div class="leftnavbar-brand">
-    프로젝트 목록
+    💡 프로젝트 목록
   </div>
 <!--<div class="btn-group-vertical" role="group">-->
 <!--<div th:each="list : ${projectlist}">-->
@@ -51,6 +51,25 @@
     <div class="list-group">
         <div th:each="list : ${projectlist}">
             <a th:href="@{/project/projects/{list}/dashboard(list=${list.seq})}" class="list-group-item list-group-item-action" th:text="${list.name}"></a>
+        </div>
+    </div>
+
+    <div th:if="${#strings.startsWith(#request.requestURI, '/project/projects/')}" style="margin-top: 20px">
+        <div class="leftnavbar-brand">
+            📚 업무
+        </div>
+        <div class="list-group">
+        <a th:href="@{/project/projects/{seq}/taskList(seq=${#strings.substringBefore(#strings.substringAfter(#request.requestURI, '/project/projects/'), '/')})}" class="list-group-item list-group-item-action">전체 업무</a>
+        <a class="list-group-item list-group-item-action">담당 업무</a>
+        <a class="list-group-item list-group-item-action">참조 업무</a>
+        </div>
+
+        <div class="leftnavbar-brand" style="margin-top: 20px">
+            🛠️ 프로젝트 관리
+        </div>
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action">멤버 관리</a>
+            <a class="list-group-item list-group-item-action">마일스톤 관리</a>
         </div>
     </div>
 </div>
