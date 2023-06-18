@@ -26,7 +26,8 @@ public class TaskAdapter {
         httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
 
         HttpEntity<Long> requestEntity = new HttpEntity<>(seq, httpHeaders);
-        ResponseEntity<List<ResponseProjectListDto>> exchange = restTemplate.exchange(URL + "/project/projects?memberSeq=" + seq,
+        ResponseEntity<List<ResponseProjectListDto>> exchange = restTemplate.exchange(URL
+                        + "/project/projects?memberSeq=" + seq,
                 HttpMethod.GET,
                 requestEntity,
                 new ParameterizedTypeReference<List<ResponseProjectListDto>>() {
