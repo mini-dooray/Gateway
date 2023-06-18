@@ -17,7 +17,7 @@ public class TaskAdapter {
 
     private final RestTemplate restTemplate;
 
-    private final String URL = "http://localhost:8002";
+    private final String URL = "http://localhost:8000";
 
     //프로젝트 전체 조회
     public List<ResponseProjectListDto> getProjectsBySeq(Long seq) {
