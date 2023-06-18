@@ -57,8 +57,6 @@ public class SecurityConfig {
                     .successHandler(loginSuccessHandler(null, null))
                     .and()
                 .oauth2Login()
-//                    .clientRegistrationRepository(clientRegistrationRepository())
-//                    .authorizedClientService(auth2AuthorizedClientService())
                     .successHandler(loginSuccessHandler(null, null))
                     .failureHandler(new OAuth2LoginFailureHandler())
                     .userInfoEndpoint().userService(oAuthLoginSuccessService).and()
@@ -91,23 +89,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public ClientRegistrationRepository clientRegistrationRepository() {
-//        return new InMemoryClientRegistrationRepository(github());
-//    }
-
-//    @Bean
-//    public OAuth2AuthorizedClientService auth2AuthorizedClientService() {
-//        return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository());
-//    }
-
-//    private ClientRegistration github() {
-//        return CommonOAuth2Provider.GITHUB.getBuilder("github")
-//                .userNameAttributeName("name")
-//                .clientId("df5cbabe42b951bf6043")
-//                .clientSecret("a071098f7eb7e894335ed593585473427fb6b812")
-//                .build();
-//    }
 
     @Bean
     public AuthenticationSuccessHandler loginSuccessHandler(RedisTemplate<String, Object> redisTemplate, AccountAdapter adapter) {
@@ -119,8 +100,4 @@ public class SecurityConfig {
         return new LoginFailureHandler();
     }
 
-//    @Bean
-//    public OAuthLoginSuccessService oAuthLoginSuccessService() {
-//        return new OAuthLoginSuccessService;
-//    }
 }
