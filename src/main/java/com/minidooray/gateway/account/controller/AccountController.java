@@ -57,6 +57,6 @@ public class AccountController {
 
         accountService.signUp(dto);
 
-        return "redirect:/login";
+        return "/login";
     }
 }

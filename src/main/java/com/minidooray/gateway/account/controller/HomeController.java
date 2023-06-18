@@ -29,7 +29,7 @@ public class HomeController {
     public String home(@CookieValue(name = "SESSION", required = false) String sessionId, Model model) {
 
         if (Objects.isNull(sessionId)) {
-            return "redirect:/login";
+            return "/login";
         } else {
             String username = (String) redisTemplate.opsForHash().get(sessionId, "username");
             String authority = (String) redisTemplate.opsForHash().get(sessionId, "authority");

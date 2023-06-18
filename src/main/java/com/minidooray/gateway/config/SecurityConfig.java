@@ -3,6 +3,7 @@ package com.minidooray.gateway.config;
 import com.minidooray.gateway.account.adapter.AccountAdapter;
 import com.minidooray.gateway.account.domain.AccountDetails;
 import com.minidooray.gateway.account.handler.CustomLogoutSuccessHandler;
+import com.minidooray.gateway.account.handler.LoginFailureHandler;
 import com.minidooray.gateway.account.handler.LoginSuccessHandler;
 import com.minidooray.gateway.account.handler.OAuth2LoginFailureHandler;
 import com.minidooray.gateway.account.service.CustomUserDetailsService;
@@ -48,6 +49,11 @@ public class SecurityConfig {
                     .anyRequest().permitAll()
                     .and()
                 .formLogin()
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .loginPage("/login")
+                    .loginProcessingUrl("/login-process")
+                    .failureHandler(loginFailureHandler())
                     .successHandler(loginSuccessHandler(null, null))
                     .and()
                 .oauth2Login()
@@ -106,6 +112,11 @@ public class SecurityConfig {
     @Bean
     public AuthenticationSuccessHandler loginSuccessHandler(RedisTemplate<String, Object> redisTemplate, AccountAdapter adapter) {
         return new LoginSuccessHandler(redisTemplate, adapter);
+    }
+
+    @Bean
+    public LoginFailureHandler loginFailureHandler() {
+        return new LoginFailureHandler();
     }
 
 //    @Bean

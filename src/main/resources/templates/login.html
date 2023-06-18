@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <style>
+        h1 {
+            text-align: center;
+            color: #0079FF;
+            margin-top: 20px !important;
+        }
+        *{
+            padding: 0;
+            margin: auto;
+            border: none;
+        }
+        body{
+            font-size: 14px;
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body>
+<h1>mini-Dooray!</h1>
+<div class="d-flex justify-content-center" style="display: flex; flex-direction: column;">
+    <form role="form" action="/login-process" id="login-form" method="post" class="d-flex flex-column align-items-center">
+        <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="username" id="username">
+        <label for="username">ID</label>
+        </div>
+        <div class="form-floating">
+        <input type="password" class="form-control" name="password" id="password">
+            <label for="password">password</label>
+        </div>
+        <span th:if="${error}" style="margin-top: 15px;">
+            <p id="valid" class="alert alert-danger" th:text="${exception}"></p>
+        </span>
+        <input class="btn btn-primary" type="submit" value="login" style="width: 100%; margin-top: 15px; margin-right: auto; margin-left: auto; text-align: center"/>
+    </form>
+    <div class="link-wrapper" style="margin-top: 15px">
+        <a class="btn btn-dark" id="git-btn" href="/oauth2/authorization/github">GitHub 로그인</a>
+    </div>
+    <div class="signup" style="margin-top: 15px">
+        <a class="btn btn-success" href="/signup">회원가입</a>
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+</body>
+</html>

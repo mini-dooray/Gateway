@@ -56,3 +56,25 @@
 .nav-item .nav-link {
     color: white;
 }
+.link-wrapper {
+    width: 100%;
+    height: 48px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    text-align: center;
+    padding: 15px 10px 0;
+}
+#git-btn {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    font-size: 16px;
+    color: white;
+}
+.signup {
+    text-align: center;
+    margin-top: 20px;
+}
+.alert alert-danger {
+    color: red;
+}
